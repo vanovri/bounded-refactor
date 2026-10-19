@@ -1,0 +1,10 @@
+{
+  "attempts": [
+    {
+      "note": "fix the arithmetic, keep the public API",
+      "files": {
+        "pkg/mathutil.py": "def add(a, b):\n    return a + b\n"
+      }
+    }
+  ]
+}

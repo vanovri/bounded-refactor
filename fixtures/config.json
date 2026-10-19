@@ -1,0 +1,7 @@
+{
+  "allowlist": ["pkg/*.py"],
+  "check_command": ["python", "-c", "from pkg.mathutil import add; assert add(2, 3) == 5"],
+  "api_paths": ["pkg/mathutil.py"],
+  "max_attempts": 2,
+  "timeout_seconds": 10
+}

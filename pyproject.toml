@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bounded-refactor"
+version = "0.1.0"
+description = "Bounded local refactor runner: allowlisted candidate files, preserved originals, time and attempt limits, API checks and diff export."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Ardhya Novri Ramadhan" }]
+keywords = ["refactor", "agent", "safety", "diff", "repairgate"]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+bounded-refactor = "bounded_refactor.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["bounded_refactor*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

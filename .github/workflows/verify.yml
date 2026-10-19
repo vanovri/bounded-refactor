@@ -1,0 +1,32 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install --upgrade pip pytest
+      - run: python -m pytest -q
+      - name: Demo run
+        run: |
+          python -m bounded_refactor.cli run --project fixtures/project --config fixtures/config.json --candidate fixtures/candidate.json --out /tmp/review
+          test -s /tmp/review/accepted.diff
+          test -f /tmp/review/originals/pkg/mathutil.py
+      - run: python tools/package_release.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: dist/*
