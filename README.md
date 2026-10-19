@@ -20,7 +20,7 @@ The original tree is never modified. The accepted change is a diff plus a report
 | Trusted input only | The project must be local and symlink-free; the check command is an argv list, never a shell string. |
 | Allowlist | Every candidate path must match `config.allowlist` globs; `..`, absolute paths and symlinks are rejected. |
 | Original preservation | A full copy is written to `out/originals/` with a SHA-256 manifest before anything runs. |
-| Attempt limit | `config.max_attempts` (1â€“5); later attempts are ignored. |
+| Attempt limit | `config.max_attempts` (1-5); later attempts are ignored. |
 | Time limit | Each check runs with `timeout_seconds` (max 120) and its live process tree is stopped on timeout. |
 | API check | Public top-level names (or `__all__`) in `api_paths` are compared before/after; removed or renamed symbols reject the attempt. |
 | RepairGate gate | With `--repairgate-report`, the report must be `status: passed` and contain at least one accepted case; its digests are recorded. |
@@ -101,7 +101,7 @@ python -m pytest -q
 python -m bounded_refactor.cli run --project fixtures/project --config fixtures/config.json --candidate fixtures/candidate.json --out /tmp/review
 ```
 
-MIT â€” see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).
 
 ## Audit corrections in 0.2.0
 
