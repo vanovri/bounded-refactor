@@ -81,7 +81,7 @@ Exit codes: `0` accepted, `1` rejected, `2` invalid input or gate failure.
 
 ## Verification
 
-27 tests cover acceptance, original preservation, allowlist rejection, traversal rejection, API removal, failing checks, timeouts, attempt limits, RepairGate pass/fail, config and candidate validation, and CLI exit codes.
+28 tests cover acceptance, original preservation, allowlist rejection, traversal rejection, API removal, failing checks, timeouts, attempt limits, RepairGate pass/fail, config and candidate validation, and CLI exit codes.
 
 Fixture: a broken `add(a, b)` that returns `a - b`; the accepted candidate restores `a + b` while keeping `add` public.
 

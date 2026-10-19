@@ -83,10 +83,10 @@ def load_candidate(path: Path) -> list[dict]:
         for name, content in attempt["files"].items():
             if not isinstance(name, str) or not isinstance(content, str):
                 raise RefactorError(f"attempt {index}: file names and contents must be strings")
-            normalized = name.replace('\\', '/')
-            if normalized.casefold() in {key.casefold() for key in files}:
+            normalized_name = name.replace('\\', '/')
+            if normalized_name.casefold() in {key.casefold() for key in files}:
                 raise RefactorError('duplicate candidate path aliases')
-            files[normalized] = content
+            files[normalized_name] = content
         normalized.append({"files": files, "note": attempt.get("note", "")})
     return normalized
 
