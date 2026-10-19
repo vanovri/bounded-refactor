@@ -14,6 +14,13 @@ def test_portable_path_boundaries(name):
     assert not relative_is_safe(name)
 
 
+def test_duplicate_candidate_aliases_are_rejected(tmp_path):
+    project = copy_project(tmp_path)
+    with pytest.raises(RefactorError, match='aliases'):
+        run(project, config(tmp_path), candidate(tmp_path, [{'files': {
+            'pkg/mathutil.py': 'def add(a,b): return 5', 'pkg\\mathutil.py': 'def add(a,b): return 6'}}]), tmp_path / 'out')
+
+
 def test_refuses_overlapping_output_and_preserves_previous_evidence(tmp_path):
     project = copy_project(tmp_path)
     with pytest.raises(RefactorError, match='overlap'):
