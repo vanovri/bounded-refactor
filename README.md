@@ -26,7 +26,7 @@ The original tree is never modified. The accepted change is a diff plus a report
 | RepairGate gate | With `--repairgate-report`, the report must be `status: passed` and contain at least one accepted case; its digests are recorded. |
 | Output | `accepted.diff`, `report.json`, `originals/` and `originals-manifest.json`. Rejected attempts produce an empty diff. |
 
-The runner executes the configured check command in a temporary copy. It does not fetch anything, does not run the candidate's own code beyond that explicit command, and does not install dependencies.
+The runner executes the configured check command in a temporary copy. The runner does not install dependencies or initiate provider requests. The configured check can import candidate code and use the user's normal OS and network permissions.
 
 ## Config
 
