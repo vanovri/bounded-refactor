@@ -7,7 +7,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 ZIP_PATH = ROOT / "dist" / f"bounded-refactor-v{VERSION}.zip"
 SUMS_PATH = ROOT / "dist" / f"SHA256SUMS-v{VERSION}.txt"
 FIXED = (2026, 10, 19, 0, 0, 0)
@@ -16,7 +16,7 @@ FILES = [
     "bounded_refactor/__init__.py", "bounded_refactor/cli.py", "bounded_refactor/core.py",
     "fixtures/config.json", "fixtures/candidate.json",
     "fixtures/project/pkg/__init__.py", "fixtures/project/pkg/mathutil.py",
-    "tests/test_bounded_refactor.py", "tools/package_release.py",
+    "tests/test_bounded_refactor.py", "tests/test_audit_regressions.py", ".github/workflows/verify.yml", "tools/package_release.py",
 ]
 
 

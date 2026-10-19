@@ -118,12 +118,12 @@ def test_repairgate_gate_accepts_a_passed_report(tmp_path):
     project = copy_project(tmp_path)
     gate = write_json(tmp_path / "gate.json", {
         "version": "0.2.0", "status": "passed", "provider": "recorded proposals",
-        "cases": [{"status": "accepted", "source_digest": "abc"}],
+        "cases": [{"status": "accepted", "source_digest": "a" * 64, "original_unchanged": True}],
     })
     report = run(project, config(tmp_path), candidate(tmp_path, [fix_attempt()]), tmp_path / "out", gate)
     assert report["repairgate"]["used"] is True
     assert report["repairgate"]["accepted_cases"] == 1
-    assert report["repairgate"]["source_digests"] == ["abc"]
+    assert report["repairgate"]["source_digests"] == ["a" * 64]
 
 
 def test_repairgate_gate_rejects_a_failed_report(tmp_path):
@@ -167,4 +167,5 @@ def test_cli_exit_codes(tmp_path):
     assert code == 0
     assert (out / "report.json").exists()
     bad = candidate(tmp_path, [{"files": {"pkg/mathutil.py": "def add(a, b):\n    return a * b\n"}}])
+    out = tmp_path / 'rejected-out'
     assert main(["run", "--project", str(project), "--config", str(config(tmp_path)), "--candidate", str(bad), "--out", str(out)]) == 1

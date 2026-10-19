@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bounded-refactor"
-version = "0.1.0"
+version = "0.2.0"
 description = "Bounded local refactor runner: allowlisted candidate files, preserved originals, time and attempt limits, API checks and diff export."
 readme = "README.md"
 requires-python = ">=3.11"
