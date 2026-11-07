@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pytest
 
-from bounded_refactor.core import RefactorError, load_candidate, load_config, run
 from bounded_refactor.cli import main
+from bounded_refactor.core import RefactorError, load_candidate, load_config, run
 
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "fixtures"
@@ -154,7 +154,7 @@ def test_candidate_validation(tmp_path):
         load_candidate(bad)
     bad = write_json(tmp_path / "bad2.json", {"attempts": [{"files": {"x": 1}}]})
     with pytest.raises(RefactorError, match="strings"):
-        load_candidate(bad2 := bad)
+        load_candidate(bad)
 
 
 def test_cli_exit_codes(tmp_path):

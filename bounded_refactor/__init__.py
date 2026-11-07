@@ -1,3 +1,7 @@
 """Bounded local refactor runner."""
+from __future__ import annotations
 
-__version__ = "0.2.0"
+from .core import RefactorError, run
+
+__all__ = ["RefactorError", "__version__", "run"]
+__version__: str = "0.2.0"

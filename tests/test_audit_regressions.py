@@ -1,12 +1,10 @@
-import json
 import subprocess
 import sys
-from pathlib import Path
 
 import pytest
+from test_bounded_refactor import candidate, config, copy_project, fix_attempt
 
 from bounded_refactor.core import RefactorError, relative_is_safe, run
-from test_bounded_refactor import candidate, config, copy_project, fix_attempt
 
 
 @pytest.mark.parametrize('name', ['../x', '..\\x', 'C:relative.py', 'C:\\x.py', '/tmp/x', '\\x', '.', 'x:stream'])
@@ -71,5 +69,10 @@ def test_exported_no_newline_diff_replays_with_git_apply(tmp_path):
     attempt = {'files': {'pkg/mathutil.py': 'def add(a, b):\n    return a + b'}}
     report = run(project, config(tmp_path), candidate(tmp_path, [attempt]), tmp_path / 'out')
     assert report['accepted']
-    applied = subprocess.run(['git', 'apply', '--check', str(tmp_path / 'out/accepted.diff')], cwd=project, capture_output=True)
+    applied = subprocess.run(
+        ['git', 'apply', '--check', str(tmp_path / 'out/accepted.diff')],
+        cwd=project,
+        capture_output=True,
+        check=False,
+    )
     assert applied.returncode == 0, applied.stderr
