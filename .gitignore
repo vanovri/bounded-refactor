@@ -6,3 +6,6 @@ dist/
 *.diff
 .DS_Store
 review/
+
+graphify-out/
+
