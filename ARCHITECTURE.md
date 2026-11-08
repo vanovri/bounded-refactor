@@ -1,6 +1,8 @@
 # Architecture: bounded-refactor
 
-Reviewed on 2026-11-07 against the local working tree (`C:/Users/ardhy/Projects/bounded-refactor`). `graphify-out/graph.json` provides the local AST symbol graph.
+Crosscheck: 2026-11-08 WIB. The repository-local offline checks completed with exit code 0 in an interpreter/environment containing the declared dependencies. Hardware, live providers, deployment and unexecuted CI platforms are separate evidence boundaries.
+
+Reviewed on 2026-11-07 against the local working tree (`.`). `graphify-out/graph.json` provides the local AST symbol graph.
 
 ## 1. System Context & Data Flow
 
@@ -53,7 +55,7 @@ participant C as cli.py
 | `fixtures/project` | Synthetic broken arithmetic package (`pkg/mathutil.py`) and test suite used for deterministic local verification. |
 | `tests/test_bounded_refactor.py` | Core acceptance, path-escape, API-breakage, timeout, RepairGate precondition, and source-immutability tests. |
 | `tests/test_audit_regressions.py` | Regression coverage for encoding, symlink/path alias handling, and boundary conditions. |
-| `tests/test_retry_pipeline.py` | Async `__all__` public signature drift detection and multi-attempt retry-to-acceptance pipeline test. |
+| `tests/test_comprehensive_unit.py` | Additional unit and pipeline boundary coverage. |
 
 ## 4. State Management & Failure Handling
 
@@ -62,7 +64,7 @@ Original repository files are never modified in place: `run()` copies originals 
 ## 5. Verification Commands
 
 ```powershell
-Set-Location 'C:\Users\ardhy\Projects\bounded-refactor'
+Set-Location '.'
 & 'C:\Python314\python.exe' -m pytest -q
 ```
 

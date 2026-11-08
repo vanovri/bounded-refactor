@@ -1,6 +1,8 @@
 # Technical Debt & Performance Ledger: bounded-refactor
 
-Reviewed on 2026-11-07 against the current working tree on disk. All line numbers are 1-based and verified directly against the current production files. Every diff below is a non-destructive engineering proposal, not an applied production edit.
+Crosschecked 2026-11-08 WIB. All code diffs below are proposal-only and have not changed production source. Source references and removed patch lines were checked against this working tree. Runtime speedups remain unmeasured unless evidence is explicitly cited.
+
+Reviewed on 2026-11-08 WIB against the current working tree on disk. All line numbers are 1-based and verified directly against the current production files. Every diff below is a non-destructive engineering proposal, not an applied production edit.
 
 ## TD-01 — Exclude `.git`, `__pycache__`, and `.pytest_cache` when copying and hashing `snapshot()`
 
@@ -8,6 +10,7 @@ Reviewed on 2026-11-07 against the current working tree on disk. All line number
 - **Analysis**: While `file_manifest()` prunes `EXCLUDED_MANIFEST_DIRS` (`__pycache__`, `.pytest_cache`, `.git`), `snapshot()` copies the entire `.git` object store and bytecode caches into `output/originals/` and hashes every copied file via `target.rglob('*')`.
 
 ```diff
+diff --git a/bounded_refactor/core.py b/bounded_refactor/core.py
 --- a/bounded_refactor/core.py
 +++ b/bounded_refactor/core.py
 @@ -268,7 +268,12 @@
@@ -34,6 +37,7 @@ Reviewed on 2026-11-07 against the current working tree on disk. All line number
 - **Analysis**: Top-level functions use `_format_callable_signature(node)` (which captures both `args` and `returns`), whereas public class methods drop `member.returns`, allowing a candidate refactor to silently change or strip public method return annotations.
 
 ```diff
+diff --git a/bounded_refactor/core.py b/bounded_refactor/core.py
 --- a/bounded_refactor/core.py
 +++ b/bounded_refactor/core.py
 @@ -304,8 +304,7 @@
